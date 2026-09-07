@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #4E24C6;
+  --color-brand-light: #F4F0FF;
+  --color-brand-dark: #371891;
+}
+
+body {
+  background-color: #f3f4f6; /* gray-100 */
+}
+
+/* Hide scrollbar for clean UI but allow scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
