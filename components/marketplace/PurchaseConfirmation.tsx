@@ -31,8 +31,8 @@ export function PurchaseConfirmation({
 
   if (isSuccess) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6 text-center animate-in fade-in">
-        <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6">
+      <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in-95 duration-300">
+        <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6 animate-bounce">
           <CheckCircle2 className="w-10 h-10 text-green-500" />
         </div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">EMI plan selected successfully</h2>
@@ -44,7 +44,7 @@ export function PurchaseConfirmation({
             document.body.style.overflow = "unset";
             router.push("/shop");
           }}
-          className="w-full max-w-[300px] bg-brand text-white font-semibold py-3.5 rounded-xl transition-all hover:bg-brand-dark"
+          className="w-full max-w-[300px] bg-brand text-white font-semibold py-3.5 rounded-xl transition-all hover:bg-brand-dark hover:scale-[1.02] active:scale-[0.98]"
         >
           Back to Marketplace
         </button>
