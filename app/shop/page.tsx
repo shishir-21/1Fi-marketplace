@@ -7,6 +7,7 @@ import { SearchBar } from "@/components/shop/SearchBar";
 import { TopBrands } from "@/components/shop/TopBrands";
 import { NearbyStores } from "@/components/shop/NearbyStores";
 import { BottomNav } from "@/components/shop/BottomNav";
+import { MarketplaceHome } from "@/components/marketplace/MarketplaceHome";
 
 export type TabType = "Top Brands" | "Nearby Stores" | "1Fi Marketplace";
 
@@ -29,11 +30,7 @@ export default function ShopPage() {
       <div className="px-4 mt-6 flex-1">
         {activeTab === "Top Brands" && <TopBrands searchQuery={searchQuery} />}
         {activeTab === "Nearby Stores" && <NearbyStores />}
-        {activeTab === "1Fi Marketplace" && (
-          <div className="text-center mt-10 text-gray-500">
-            Marketplace feature coming in Phase 2
-          </div>
-        )}
+        {activeTab === "1Fi Marketplace" && <MarketplaceHome />}
       </div>
 
       <BottomNav />
