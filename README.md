@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 1Fi Marketplace
 
-## Getting Started
+## Overview
+This project is an independent implementation created for the 1Fi SDE Intern Assignment. 
+The original 1Fi Shop experience was used as a visual and product reference. The core assignment feature—a new "1Fi Marketplace"—was added as an integrated tab within the existing Shop layout. This implementation is completely standalone and built from scratch without any access to the original 1Fi source code.
 
-First, run the development server:
+## Features
+- **1Fi-inspired Shop UI**: Recreated the look and feel of the live 1Fi shop page.
+- **Top Brands & Nearby Stores**: Authentic recreation of the tabs and layout.
+- **Marketplace**: A fully functional tab allowing users to browse products.
+- **Product Search & Filtering**: Filter by category and search by name/brand.
+- **Product Details**: View variants, specifications, and full descriptions.
+- **EMI Plans & Calculation**: Mock calculation of monthly EMIs with selectable interest and no-cost EMI options.
+- **Purchase Confirmation**: A clean, animated confirmation modal for placing mock orders.
+- **Responsive Design**: Designed Mobile-first to look like a native application within a desktop browser frame.
+
+## Tech Stack
+- **Next.js 15 (App Router)**
+- **TypeScript**
+- **React**
+- **Tailwind CSS v4**
+- **Lucide React** (Icons)
+
+## Running Locally
+
+To run the project locally, install dependencies and start the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
+- **App Router (`/app`)**: Contains layout structure, `shop` page, and dynamic `marketplace/[id]` routing.
+- **Components (`/components`)**: 
+  - `shop/`: Components for the base Shop UI (Banner, Tabs, TopBrands, etc.).
+  - `marketplace/`: Components for the marketplace experience (ProductGrid, ProductDetails, PurchaseConfirmation).
+- **Data (`/data`)**: Contains local mock data for products, categories, and brands to keep UI components pure.
+- **Types (`/types`)**: Strong TypeScript definitions for Products, Variants, and EMI Plans.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Important Note
+**All product, brand, and EMI data in this project is mock data created specifically for the assignment.** No real transactions are performed, and this data does not represent actual 1Fi partner or financial data.
