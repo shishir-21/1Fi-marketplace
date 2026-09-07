@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, "bg-gray-100 min-h-screen flex justify-center text-gray-900")}>
-        <div className="w-full max-w-[450px] bg-white min-h-screen shadow-xl relative overflow-x-hidden flex flex-col">
+        <div className="w-full max-w-[450px] bg-white min-h-screen shadow-2xl relative overflow-x-hidden flex flex-col mx-auto sm:border-x sm:border-gray-200">
           {children}
         </div>
       </body>
