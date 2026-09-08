@@ -32,7 +32,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="flex flex-col">
         {/* Header */}
         <div className="sticky top-0 z-20 bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-3">
-          <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-gray-50 text-gray-700">
+          <button onClick={() => router.push("/shop?tab=marketplace")} className="p-2 -ml-2 rounded-full hover:bg-gray-50 text-gray-700">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="font-semibold text-lg line-clamp-1 flex-1">{product.name}</h1>

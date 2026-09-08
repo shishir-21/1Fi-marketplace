@@ -42,7 +42,7 @@ export function PurchaseConfirmation({
         <button
           onClick={() => {
             document.body.style.overflow = "unset";
-            router.push("/shop");
+            router.push("/shop?tab=marketplace");
           }}
           className="w-full max-w-[300px] bg-brand text-white font-semibold py-3.5 rounded-xl transition-all hover:bg-brand-dark hover:scale-[1.02] active:scale-[0.98]"
         >

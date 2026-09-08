@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { ShopBanner } from "@/components/shop/ShopBanner";
 import { ShopTabs } from "@/components/shop/ShopTabs";
 import { SearchBar } from "@/components/shop/SearchBar";
@@ -11,16 +12,37 @@ import { MarketplaceHome } from "@/components/marketplace/MarketplaceHome";
 
 export type TabType = "Top Brands" | "Nearby Stores" | "1Fi Marketplace";
 
-export default function ShopPage() {
-  const [activeTab, setActiveTab] = useState<TabType>("Top Brands");
+const TAB_MAPPING: Record<string, TabType> = {
+  "top-brands": "Top Brands",
+  "nearby-stores": "Nearby Stores",
+  marketplace: "1Fi Marketplace",
+};
+
+const REVERSE_TAB_MAPPING: Record<TabType, string> = {
+  "Top Brands": "top-brands",
+  "Nearby Stores": "nearby-stores",
+  "1Fi Marketplace": "marketplace",
+};
+
+function ShopContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  
+  const tabQuery = searchParams.get("tab");
+  const activeTab: TabType = (tabQuery && TAB_MAPPING[tabQuery]) ? TAB_MAPPING[tabQuery] : "Top Brands";
+
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handleTabChange = (tab: TabType) => {
+    router.push(`/shop?tab=${REVERSE_TAB_MAPPING[tab]}`);
+  };
 
   return (
     <div className="flex flex-col min-h-screen relative pb-20">
       <ShopBanner />
       
       <div className="px-4 -mt-6 relative z-10">
-        <ShopTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <ShopTabs activeTab={activeTab} setActiveTab={handleTabChange} />
       </div>
 
       <div className="px-4 mt-6">
@@ -35,5 +57,13 @@ export default function ShopPage() {
 
       <BottomNav />
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-100 flex items-center justify-center">Loading...</div>}>
+      <ShopContent />
+    </Suspense>
   );
 }
