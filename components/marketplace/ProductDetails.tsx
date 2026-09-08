@@ -70,13 +70,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           <RatingsSummaryView ratingSummary={product.ratingSummary} />
         </div>
 
-        {/* Highlights */}
-        {product.highlights && product.highlights.length > 0 && (
-          <div className="px-4">
-            <ProductHighlights highlights={product.highlights} />
-          </div>
-        )}
-
         {/* Variants */}
         {product.variants && (
           <div className="px-4 py-5 border-y border-gray-100 bg-gray-50/50">
@@ -152,6 +145,13 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           </div>
         </div>
 
+        {/* Highlights */}
+        {product.highlights && product.highlights.length > 0 && (
+          <div className="px-4">
+            <ProductHighlights highlights={product.highlights} />
+          </div>
+        )}
+
         {/* All Details Tabs */}
         <div className="mt-4">
           <div className="flex overflow-x-auto hide-scrollbar px-4 pb-1 gap-2 border-b border-gray-100">
@@ -180,10 +180,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     {product.description}
                   </p>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-4 border-b border-gray-100 pb-2">Ratings & Reviews</h3>
-                  <ProductReviews ratingSummary={product.ratingSummary} reviews={product.reviews} />
-                </div>
               </div>
             )}
             
@@ -205,6 +201,12 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Ratings & Reviews */}
+        <div className="px-4 py-6 border-t border-gray-100">
+          <h3 className="font-semibold text-gray-900 mb-5 border-b border-gray-100 pb-2">Ratings & Reviews</h3>
+          <ProductReviews ratingSummary={product.ratingSummary} reviews={product.reviews} />
         </div>
       </div>
 
