@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Product } from "@/types/product";
 import { formatCurrency } from "@/lib/utils";
 
+import Image from "next/image";
+
 interface ProductCardProps {
   product: Product;
 }
@@ -20,8 +22,8 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/marketplace/${product.id}`}>
       <div className="bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex flex-col gap-2 h-full hover:shadow-md transition-shadow active:scale-[0.98]">
-        <div className={`w-full aspect-square rounded-xl ${product.image} mb-1 flex items-center justify-center text-3xl shadow-inner`}>
-          📱
+        <div className="w-full aspect-square rounded-xl bg-gray-50 mb-1 flex items-center justify-center shadow-inner relative overflow-hidden">
+          <Image src={product.image} alt={product.name} fill className="object-contain p-2" sizes="(max-width: 450px) 50vw, 33vw" />
         </div>
         
         <div className="flex-1 flex flex-col">

@@ -7,7 +7,7 @@ export const PRODUCTS: Product[] = [
     brand: "Apple",
     category: "Mobiles",
     price: 129900,
-    image: "bg-gray-100", // Using color placeholder as mock image
+    image: "/images/iphone17.png",
     description: "The ultimate iPhone experience with the new A18 Pro chip.",
     variants: [
       { id: "v-128", name: "128 GB", price: 129900 },
@@ -31,7 +31,7 @@ export const PRODUCTS: Product[] = [
     brand: "Apple",
     category: "Laptops",
     price: 114900,
-    image: "bg-gray-200",
+    image: "/images/macbook.png",
     description: "Supercharged by M3. The world's most popular laptop.",
     variants: [
       { id: "v-256", name: "256 GB SSD", price: 114900 },
@@ -54,7 +54,7 @@ export const PRODUCTS: Product[] = [
     brand: "Samsung",
     category: "Mobiles",
     price: 129999,
-    image: "bg-slate-200",
+    image: "/images/samsungs24.png",
     description: "Galaxy AI is here. Welcome to the era of mobile AI.",
     variants: [
       { id: "v-256", name: "256 GB", price: 129999 },
@@ -77,7 +77,7 @@ export const PRODUCTS: Product[] = [
     brand: "Sony",
     category: "TVs",
     price: 57990,
-    image: "bg-neutral-800",
+    image: "/images/sonytv.jpg",
     description: "Immersive 4K experience with rich colors and sharp details.",
     emiPlans: [
       { id: "emi-3", months: 3, interestRate: 0, isNoCost: true },

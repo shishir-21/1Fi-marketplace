@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { X, CheckCircle2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Product, Variant, EMIPlan } from "@/types/product";
 import { formatCurrency } from "@/lib/utils";
 
@@ -65,8 +66,8 @@ export function PurchaseConfirmation({
         <div className="p-5 overflow-y-auto">
           {/* Product Summary */}
           <div className="flex gap-4 mb-6">
-            <div className={`w-16 h-16 rounded-xl ${product.image} flex items-center justify-center text-2xl bg-gray-50 border border-gray-100`}>
-              📱
+            <div className="w-16 h-16 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center relative overflow-hidden flex-shrink-0">
+              <Image src={product.image} alt={product.name} fill className="object-contain p-1.5" sizes="64px" />
             </div>
             <div>
               <h3 className="font-semibold text-gray-900">{product.name}</h3>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Product, Variant, EMIPlan } from "@/types/product";
+import Image from "next/image";
 import { formatCurrency, cn } from "@/lib/utils";
 import { PurchaseConfirmation } from "./PurchaseConfirmation";
 
@@ -39,8 +40,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         </div>
 
         {/* Image */}
-        <div className={cn("w-full aspect-[4/3] flex items-center justify-center text-7xl", product.image)}>
-          📱
+        <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-50 relative border-b border-gray-100">
+          <Image src={product.image} alt={product.name} fill className="object-contain p-6" priority sizes="(max-width: 450px) 100vw, 450px" />
         </div>
 
         {/* Basic Info */}
