@@ -7,10 +7,20 @@ import { Product, Variant, EMIPlan } from "@/types/product";
 import Image from "next/image";
 import { formatCurrency, cn } from "@/lib/utils";
 import { PurchaseConfirmation } from "./PurchaseConfirmation";
+import {
+  ProductHighlights,
+  RatingsSummaryView,
+  ProductSpecifications,
+  ProductReviews,
+  ProductWarranty,
+  ProductManufacturer
+} from "./ProductSections";
 
 interface ProductDetailsProps {
   product: Product;
 }
+
+type TabType = "Overview" | "Specifications" | "Warranty" | "Manufacturer";
 
 export function ProductDetails({ product }: ProductDetailsProps) {
   const router = useRouter();
@@ -22,6 +32,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   
   const [selectedEmi, setSelectedEmi] = useState<EMIPlan | null>(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  
+  const [activeTab, setActiveTab] = useState<TabType>("Overview");
 
   const currentPrice = selectedVariant ? selectedVariant.price : product.price;
 
@@ -30,9 +42,9 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col pb-32">
         {/* Header */}
-        <div className="sticky top-0 z-20 bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-3">
+        <div className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-gray-100 px-4 py-3 flex items-center gap-3 shadow-sm">
           <button onClick={() => router.push("/shop?tab=marketplace")} className="p-2 -ml-2 rounded-full hover:bg-gray-50 text-gray-700">
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -49,21 +61,26 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           <span className="text-xs font-bold uppercase tracking-widest text-brand mb-1 block">
             {product.brand}
           </span>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">
+          <h2 className="text-xl font-bold text-gray-900 mb-1 leading-tight">
             {product.name}
           </h2>
-          <div className="text-xl font-bold text-gray-900">
+          <div className="text-2xl font-bold text-gray-900 mb-3">
             {formatCurrency(currentPrice)}
           </div>
-          <p className="text-sm text-gray-600 mt-3 leading-relaxed">
-            {product.description}
-          </p>
+          <RatingsSummaryView ratingSummary={product.ratingSummary} />
         </div>
+
+        {/* Highlights */}
+        {product.highlights && product.highlights.length > 0 && (
+          <div className="px-4">
+            <ProductHighlights highlights={product.highlights} />
+          </div>
+        )}
 
         {/* Variants */}
         {product.variants && (
-          <div className="px-4 py-5 border-b border-gray-100">
-            <h3 className="font-semibold text-gray-900 mb-3">Select Variant</h3>
+          <div className="px-4 py-5 border-y border-gray-100 bg-gray-50/50">
+            <h3 className="font-semibold text-gray-900 mb-3">Choose Variant</h3>
             <div className="flex flex-wrap gap-3">
               {product.variants.map((variant) => {
                 const isSelected = selectedVariant?.id === variant.id;
@@ -74,8 +91,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     className={cn(
                       "px-4 py-2 border rounded-xl text-sm font-medium transition-all",
                       isSelected
-                        ? "border-brand bg-brand-light text-brand shadow-sm"
-                        : "border-gray-200 text-gray-700 hover:border-gray-300"
+                        ? "border-brand bg-brand-light text-brand shadow-sm ring-1 ring-brand/20"
+                        : "border-gray-200 text-gray-700 bg-white hover:border-gray-300"
                     )}
                   >
                     {variant.name}
@@ -135,22 +152,64 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           </div>
         </div>
 
-        {/* Specifications */}
-        <div className="px-4 py-5">
-          <h3 className="font-semibold text-gray-900 mb-3">Specifications</h3>
-          <div className="flex flex-col gap-2">
-            {Object.entries(product.specifications).map(([key, value]) => (
-              <div key={key} className="flex text-sm py-2 border-b border-gray-50 last:border-0">
-                <span className="w-1/3 text-gray-500 font-medium">{key.replace("_", " ")}</span>
-                <span className="w-2/3 text-gray-900">{value}</span>
-              </div>
+        {/* All Details Tabs */}
+        <div className="mt-4">
+          <div className="flex overflow-x-auto hide-scrollbar px-4 pb-1 gap-2 border-b border-gray-100">
+            {(["Overview", "Specifications", "Warranty", "Manufacturer"] as TabType[]).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={cn(
+                  "px-4 py-2.5 whitespace-nowrap text-sm font-medium border-b-2 transition-colors",
+                  activeTab === tab
+                    ? "border-brand text-brand"
+                    : "border-transparent text-gray-500 hover:text-gray-700"
+                )}
+              >
+                {tab}
+              </button>
             ))}
+          </div>
+
+          <div className="px-4 py-5">
+            {activeTab === "Overview" && (
+              <div className="flex flex-col gap-6 animate-in fade-in">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Description</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {product.description}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-4 border-b border-gray-100 pb-2">Ratings & Reviews</h3>
+                  <ProductReviews ratingSummary={product.ratingSummary} reviews={product.reviews} />
+                </div>
+              </div>
+            )}
+            
+            {activeTab === "Specifications" && (
+              <div className="animate-in fade-in">
+                <ProductSpecifications groups={product.specificationGroups} />
+              </div>
+            )}
+
+            {activeTab === "Warranty" && (
+              <div className="animate-in fade-in">
+                <ProductWarranty warranty={product.warranty} />
+              </div>
+            )}
+
+            {activeTab === "Manufacturer" && (
+              <div className="animate-in fade-in">
+                <ProductManufacturer manufacturer={product.manufacturer} />
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-0 w-full max-w-[450px] bg-white border-t border-gray-100 p-4 pb-6 z-30 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+      <div className="fixed bottom-0 w-full max-w-[450px] bg-white border-t border-gray-100 p-4 pb-6 z-30 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
         <button
           disabled={isProceedDisabled}
           onClick={() => setShowConfirmation(true)}
