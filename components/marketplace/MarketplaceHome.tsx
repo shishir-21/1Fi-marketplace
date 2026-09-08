@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { SearchBar } from "@/components/shop/SearchBar";
 import { CATEGORIES } from "@/data/categories";
 import { PRODUCTS } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 
-export function MarketplaceHome() {
-  const [searchQuery, setSearchQuery] = useState("");
+interface MarketplaceHomeProps {
+  searchQuery: string;
+}
+
+export function MarketplaceHome({ searchQuery }: MarketplaceHomeProps) {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredProducts = PRODUCTS.filter((product) => {
@@ -25,8 +27,6 @@ export function MarketplaceHome() {
         <h2 className="text-xl font-bold text-gray-900 mb-1">1Fi Marketplace</h2>
         <p className="text-sm text-gray-500">Shop your favorite products on EMI.</p>
       </div>
-
-      <SearchBar query={searchQuery} setQuery={setSearchQuery} />
 
       {/* Categories */}
       <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-1 -mx-4 px-4">

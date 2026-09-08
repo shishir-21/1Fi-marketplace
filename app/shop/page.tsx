@@ -34,7 +34,15 @@ function ShopContent() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleTabChange = (tab: TabType) => {
+    setSearchQuery(""); // clear search when switching tabs
     router.push(`/shop?tab=${REVERSE_TAB_MAPPING[tab]}`);
+  };
+
+  const getPlaceholder = () => {
+    if (activeTab === "Top Brands") return "Search online stores...";
+    if (activeTab === "Nearby Stores") return "Search stores...";
+    if (activeTab === "1Fi Marketplace") return "Search products...";
+    return "Search...";
   };
 
   return (
@@ -46,13 +54,13 @@ function ShopContent() {
       </div>
 
       <div className="px-4 mt-6">
-        <SearchBar query={searchQuery} setQuery={setSearchQuery} />
+        <SearchBar query={searchQuery} setQuery={setSearchQuery} placeholder={getPlaceholder()} />
       </div>
 
       <div className="px-4 mt-6 flex-1">
         {activeTab === "Top Brands" && <TopBrands searchQuery={searchQuery} />}
         {activeTab === "Nearby Stores" && <NearbyStores />}
-        {activeTab === "1Fi Marketplace" && <MarketplaceHome />}
+        {activeTab === "1Fi Marketplace" && <MarketplaceHome searchQuery={searchQuery} />}
       </div>
 
       <BottomNav />
