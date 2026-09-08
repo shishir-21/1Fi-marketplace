@@ -46,7 +46,7 @@ function ShopContent() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen relative pb-20">
+    <div className="flex flex-col min-h-screen relative pb-32">
       <ShopBanner />
       
       <div className="px-4 -mt-6 relative z-10">

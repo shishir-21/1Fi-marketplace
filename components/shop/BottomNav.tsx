@@ -13,7 +13,7 @@ export function BottomNav() {
   const activeTab = "shop";
 
   return (
-    <div className="fixed bottom-0 w-full max-w-[450px] bg-white border-t border-gray-100 px-4 py-2 flex items-center justify-between z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-80px)] max-w-[370px] bg-white rounded-[28px] px-6 py-2.5 flex items-center justify-between z-50 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-gray-100">
       {NAV_ITEMS.map((item) => {
         const Icon = item.icon;
         const isActive = activeTab === item.id;
@@ -22,15 +22,15 @@ export function BottomNav() {
           <button
             key={item.id}
             className={cn(
-              "flex flex-col items-center justify-center gap-1 min-w-[60px] py-1 transition-colors relative",
+              "flex flex-col items-center justify-center gap-1 min-w-[50px] py-1 transition-colors relative",
               isActive ? "text-brand" : "text-gray-400 hover:text-gray-600"
             )}
           >
-            {isActive && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-1 bg-brand rounded-b-full shadow-[0_0_8px_rgba(78,36,198,0.4)]" />
-            )}
             <Icon className="w-5 h-5" />
             <span className="text-[10px] font-medium leading-none">{item.label}</span>
+            {isActive && (
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-6 h-1 bg-brand rounded-full shadow-[0_0_8px_rgba(78,36,198,0.4)]" />
+            )}
           </button>
         );
       })}
