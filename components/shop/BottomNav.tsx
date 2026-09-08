@@ -13,7 +13,7 @@ export function BottomNav() {
   const activeTab = "shop";
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-80px)] max-w-[370px] bg-white rounded-[28px] px-6 py-2.5 flex items-center justify-between z-50 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-gray-100">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-64px)] max-w-[386px] bg-white rounded-[28px] px-5 py-2.5 flex items-center justify-between z-50 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-gray-100">
       {NAV_ITEMS.map((item) => {
         const Icon = item.icon;
         const isActive = activeTab === item.id;
