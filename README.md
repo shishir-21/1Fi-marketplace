@@ -1,7 +1,6 @@
 # 1Fi Marketplace
 
-**Live Demo:** https://1-fi-marketplace-mwl69pqzl-shishir-21s-projects.vercel.app/shop?tab=marketplace
-
+**Live Demo:** https://1-fi-marketplace-7doihca82-shishir-21s-projects.vercel.app/shop
 ## Overview
 
 This project is an independent implementation created for the 1Fi SDE Intern Assignment.
